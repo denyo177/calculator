@@ -55,21 +55,23 @@ const main = function (e) {
     if (e.target.id === "clear") {
         clearDisplay();
         a = b = "0";
-        addD
-    isplayValue("0");
+        addDisplayValue("0");
         calcStage = 0;
     };
     if (calcStage === 0) {
         if (e.target.className === "key number") {
             clearDisplay();
-            addD
-        isplayValue(e.target.id);
+            addDisplayValue(e.target.id);
             calcStage = 1;
         };
     }  else if (calcStage === 1) {
         if (e.target.className === "key number") {
-            addD
-        isplayValue(e.target.id);
+            addDisplayValue(e.target.id);
+        };
+        if (getDisplayValue().length > 9) {
+            const tooLongValue = getDisplayValue();
+            clearDisplay();
+            addDisplayValue(tooLongValue.substring(1));
         };
 
         if (e.target.className === "key operator") {
@@ -84,21 +86,18 @@ const main = function (e) {
 
         if (e.target.className === "key number") {
             clearDisplay(); // wahrscheinlich nicht wenn aus der loop kommend
-            addD
-        isplayValue(e.target.id);
+            addDisplayValue(e.target.id);
             calcStage = 3;
         };
     } else if (calcStage === 3) {
         if (e.target.className === "key number") { 
-            addD
-        isplayValue(e.target.id);
+            addDisplayValue(e.target.id);
         };
 
         if (e.target.className === "key operator") {
             a = operate(op, a, getDisplayValue());
             clearDisplay();
-            addD
-        isplayValue(a);
+            addDisplayValue(a);
             op = e.target.id;
             calcStage = 2;
         };
@@ -107,8 +106,7 @@ const main = function (e) {
             b = getDisplayValue();
             const result = operate(op, a, b);
             clearDisplay();
-            addD
-        isplayValue(result);
+            addDisplayValue(result);
             a = result;
             b = "0";
             calcStage = 1;
@@ -117,4 +115,6 @@ const main = function (e) {
 };
 
 window.addEventListener('click', main);
+
+//maximum 9 ziffern darstellen
 
