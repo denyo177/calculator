@@ -143,7 +143,5 @@ const main = function (e) {
 
 window.addEventListener('click', main);
 
-//maximum 9 ziffern darstellen auch an anderen stellen im code
-// add button highlighting
 
 
